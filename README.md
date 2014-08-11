@@ -32,3 +32,8 @@
 预览地址：*[点此预览](http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html)*
 
 截图：
+* ![http://kingarthas37.github.io/demos/demo-b5m/gzx/1.jpg](http://kingarthas37.github.io/demos/demo-b5m/gzx/1.jpg)
+* ![http://kingarthas37.github.io/demos/demo-b5m/gzx/2.jpg](http://kingarthas37.github.io/demos/demo-b5m/gzx/2.jpg)
+* ![http://kingarthas37.github.io/demos/demo-b5m/gzx/3.jpg](http://kingarthas37.github.io/demos/demo-b5m/gzx/3.jpg)
+* ![http://kingarthas37.github.io/demos/demo-b5m/gzx/4.jpg](http://kingarthas37.github.io/demos/demo-b5m/gzx/4.jpg)
+* ![http://kingarthas37.github.io/demos/demo-b5m/gzx/5.jpg](http://kingarthas37.github.io/demos/demo-b5m/gzx/5.jpg)
