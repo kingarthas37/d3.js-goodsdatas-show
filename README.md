@@ -3,6 +3,8 @@
 
 ### Tags: d3.js  sea.js  handlebars.js 
 
+浏览器支持：chrome,firefox,IE9+
+
 说明：可自行根据自身的业务数据更改数据文件*./public/js/data.json*：
 
 ```js
