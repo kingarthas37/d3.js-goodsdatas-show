@@ -1,17 +1,17 @@
 (function(window) {
 
+    'use strict';
+
     //判断浏览器是否支持svg
     if(!(!!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg','svg').createSVGRect)) {
-        seajs.use(['arale/dialog/1.3.0/confirmbox'],function(ConfirmBox) {
-            ConfirmBox.show('对不起，您的浏览器不支持此功能，推荐使用Chrome或最新浏览器浏览！',function() {},{width:300});
+        seajs.use(['arale/dialog/1.3.0/confirmbox','seajs/seajs-style/1.0.2/seajs-style'],function(ConfirmBox) {
+            ConfirmBox.show('您当前的浏览器不支持此功能，推荐使用Chrome或最新浏览器浏览！',function() {},{width:300});
         });
         return;
     }
 
 
-    seajs.use(['$','gallery/d3/3.4.6/d3'],function($) {
-
-        'use strict';
+    seajs.use(['$','gallery/handlebars/1.0.2/handlebars','gallery/d3/3.4.6/d3'],function($,Handlebars) {
 
         window.PI = window.PI || {};
         window.PI = (function() {
@@ -94,7 +94,6 @@
 
                     $.ajax({
                         url:'http://gzx.b5m.com/dtdata.html?type_mark=hover_t&keyword='+ encodeURIComponent(that.piChildKey) + '&limit=10&osite='+ $this.attr('data-key'),
-                        //  url:'http://gzx.b5m.com/dtdata.html?type_mark=hover_t&keyword='+ encodeURIComponent('华为手机') + '&osite=yixun&limit=3',
                         dataType:'jsonp',
                         jsonp: 'jsonpCallback'
                     }).success(function(data) {
@@ -122,9 +121,8 @@
 
                             var html = '';
 
-                            $.each(data.data,function(i,n) {
-                                html += '<li><div class="view-pic"><a target="_blank" href="'+ n.url +'"><img src="'+ n.pics.split(',')[0] +'" alt="'+ n.query +'" /></a></div><div class="view-text"><a target="_blank" title="'+ n.title +'" href="'+ n.url +'">'+ n.title +'</a></div><div class="view-price"><strong>￥'+ parseFloat(n.curr_price.toString()) +'</strong> <span>'+ n.cmt_num +'条评论</span></div></li>';
-                            });
+                            var source = $('#pi-process-template').html();
+                            html += Handlebars.compile(source)(data);
 
                             piProcessBoxUl.width(data.data.length * 240).html(html);
 
@@ -156,60 +154,12 @@
 
 
                 //处理hover dom process
-                (function() {
 
-                    //pi process box slider 控制
-                    var dest = 240;
-
-                    piProcessBox.find('.btn-next').click(function() {
-                        if(that.sliderProcessCur === piProcessBoxUl.find('li').length -1) {
-                            return false;
-                        }
-                        that.sliderProcessCur ++;
-                        piProcessBoxUl.parent().animate({'scrollLeft':that.sliderProcessCur * dest});
-                        return false;
-                    });
-
-                    piProcessBox.find('.btn-prev').click(function() {
-                        if(that.sliderProcessCur === 0) {
-                            return false;
-                        }
-                        that.sliderProcessCur --;
-                        piProcessBoxUl.parent().animate({'scrollLeft':that.sliderProcessCur * dest});
-                        return false;
-                    });
-
-                })();
+                 //pi process box slider 控制
+                that.bindBtnClick(piProcessBox,piProcessBoxUl,that.sliderProcessCur,240);
 
                 //处理click dom slider click
-                (function() {
-
-                    var dest = 850;
-
-                    piClickBox.click(function(e) {
-                        e.stopPropagation();
-                    });
-
-                    piClickBox.find('.btn-next').click(function() {
-                        if(that.sliderClickCur === piClickBoxUl.find('li').length -1) {
-                            return false;
-                        }
-                        that.sliderClickCur ++;
-                        piClickBoxUl.parent().animate({'scrollLeft':that.sliderClickCur * dest});
-                        return false;
-                    });
-
-                    piClickBox.find('.btn-prev').click(function() {
-                        if(that.sliderClickCur === 0) {
-                            return false;
-                        }
-                        that.sliderClickCur --;
-                        piClickBoxUl.parent().animate({'scrollLeft':that.sliderClickCur * dest});
-                        return false;
-                    });
-
-
-                })();
+                that.bindBtnClick(piClickBox,piClickBoxUl,that.sliderClickCur,850);
 
 
                 //piHoverBox控制状态
@@ -230,30 +180,9 @@
 
 
                 //处理click dom slider hover
-                (function() {
-
-                    var dest = 94;
-
-                    piHoverBox.find('.btn-next').click(function() {
-                        if(that.sliderHoverCur === piHoverBoxUl.find('li').length - 4) {
-                            return false;
-                        }
-                        that.sliderHoverCur ++;
-                        piHoverBoxUl.parent().animate({'scrollLeft':that.sliderHoverCur * dest});
-                        return false;
-                    });
-
-                    piHoverBox.find('.btn-prev').click(function() {
-                        if(that.sliderHoverCur === 0) {
-                            return false;
-                        }
-                        that.sliderHoverCur --;
-                        piHoverBoxUl.parent().animate({'scrollLeft':that.sliderHoverCur * dest});
-                        return false;
-                    });
+                that.bindBtnClick(piHoverBox,piHoverBoxUl,that.sliderHoverCur,94);
 
 
-                })();
 
 
             };
@@ -673,7 +602,11 @@
                             if(data.code === 101) {
                                 piClickBoxUl.width(850).html('<li><p style="padding:15px">暂无数据!</p></li>');
                             }else {
-                                $.each(data.data,function(i,n) {
+
+                                var source = $('#pi-click-template').html();
+                                html += Handlebars.compile(source)(data);
+
+                             /*   $.each(data.data,function(i,n) {
                                     if(i%2===0) {
                                         html += '<li class="cf">';
                                     }
@@ -681,7 +614,8 @@
                                     if(i%2===1) {
                                         html += '</li>';
                                     }
-                                });
+                                });*/
+
                                 piClickBoxUl.width(Math.ceil(data.data.length/2) * 850).html(html);
                             }
 
@@ -724,9 +658,65 @@
 
             }
 
-            return new pi();
 
+            //绑定数据click事件
+            pi.prototype.bindBtnClick = function(box,ul,cur,dest) {
+                var that = this;
+                box.find('.btn-next').click(function() {
+                    if(cur === ul.find('li').length -1) {
+                        return false;
+                    }
+                    cur ++;
+                    ul.parent().animate({'scrollLeft':cur * dest});
+                    return false;
+                });
+
+                box.find('.btn-prev').click(function() {
+                    if(cur === 0) {
+                        return false;
+                    }
+                    cur --;
+                    ul.parent().animate({'scrollLeft':cur * dest});
+                    return false;
+                });
+            };
+            return new pi();
         })();
+
+
+
+
+        //Handlerbar Helpers
+        Handlebars.registerHelper('h-pics-split', function(pics) {
+            return pics.split(',')[0];
+        });
+
+        Handlebars.registerHelper('h-curr-price',function(prices) {
+            return parseFloat(prices.toString());
+        });
+
+        Handlebars.registerHelper('h-disc',function(disc) {
+            return Math.round(disc*100);
+        });
+
+        Handlebars.registerHelper('h-average',function(average) {
+            return Math.round(average*100)/100;
+        });
+
+        Handlebars.registerHelper('h-li-ctrl-start',function(i) {
+            if(parseInt(i) % 2 === 0) {
+                return new Handlebars.SafeString('<li class="cf">');
+            }
+            return Handlebars.SafeString('');;
+        });
+
+        Handlebars.registerHelper('h-li-ctrl-end',function(i) {
+            if(parseInt(i) % 2 === 1) {
+                return new Handlebars.SafeString('</li>');
+            }
+            return Handlebars.SafeString('');;
+        });
+
 
 
     });

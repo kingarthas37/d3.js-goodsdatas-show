@@ -45,8 +45,55 @@
 
 
 
-<script id="b5m-libs" type="text/javascript" src="http://staticcdn.b5m.com/static/public/sea-modules/dist/libs.js" rootPath="http://staticcdn.b5m.com/static/public/sea-modules/dist" version="20150421094218"></script>
-<script type="text/javascript" src="public/js/pi.js"></script>
+<script id="pi-click-template" type="text/x-handlebars-template">
+    {{#each data}}
+    {{h-li-ctrl-start @index}}
+    <div class="item-panel cf">
+        <div class="pic">
+            <a target="_blank" href="{{url}}"><span></span><img src="{{h-pics-split pics}}" alt="{{title}}" /></a>
+        </div>
+        <div class="info-1">
+            <p><a title="{{title}}" target="_blank" href="{{url}}"><span class="light">【{{shop}}】</span>{{title}}</a></p>
+            <p><span class="light size">￥{{h-curr-price curr_price}}</span></p>
+        </div>
+        <div class="info-2">
+            <p>降价幅度：<em class="light">{{h-disc disc}}%</em></p>
+            <p>历史最低价：<em>￥{{h-curr-price curr_price}}</em></p>
+            <p>历史均价：<em>￥{{h-average average}}</em></p>
+            <p>评论数：<em>{{cmt_num}}</em></p>
+        </div>
+    </div>
+    {{h-li-ctrl-end @index}}
+    {{/each}}
+</script>
+
+
+<script id="pi-process-template" type="text/x-handlebars-template">
+    {{#each data}}
+    <li>
+        <div class="view-pic"><a target="_blank" href="{{url}}"><img src="{{h-pics-split pics}}" alt="{{query}}" /></a></div>
+        <div class="view-text"><a target="_blank" title="{{title}}" href="{{url}}">{{title}}</a></div>
+        <div class="view-price"><strong>￥{{h-curr-price curr_price}}</strong> <span>{{cmt_num}}条评论</span></div>
+    </li>
+    {{/each}}
+</script>
+
+
+<script type="text/javascript" src="sea-modules/seajs/seajs/2.2.1/sea.js"></script>
+<script type="text/javascript">
+
+    //配置seajs
+    seajs.config({
+        base: "./sea-modules/",
+        alias: {
+            "$": "jquery/jquery/1.10.1/jquery.js"
+        }
+    });
+
+    //加载pi模块
+    seajs.use('./public/js/pi');
+
+</script>
 
 </body>
 </html>
