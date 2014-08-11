@@ -25,3 +25,9 @@
         {"name": "荣耀3x", "value": 5607,"key":"荣耀3x"}]
       }]
  }
+
+......
+
+预览地址：*[http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html](http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html)*
+
+截图：
