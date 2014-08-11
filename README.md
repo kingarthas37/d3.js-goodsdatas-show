@@ -5,8 +5,6 @@
 
 说明：可自行根据自身的业务数据更改数据文件*./public/js/data.json*：
 
-####预览地址：*[点此预览](http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html)*
-
 ```js
  { "name":"PI","children": [
     {"name":"荣耀手机","value":5607, "key":"荣耀3x", "childrens": [
@@ -31,6 +29,7 @@
 
 ......
 
+__预览地址：[点此预览](http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html)__
 
 截图：
 * ![http://kingarthas37.github.io/demos/demo-b5m/gzx/1.jpg](http://kingarthas37.github.io/demos/demo-b5m/gzx/1.jpg)
