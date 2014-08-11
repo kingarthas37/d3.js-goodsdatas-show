@@ -5,7 +5,7 @@
 
 说明：可自行根据自身的业务数据更改数据文件*./public/js/data.json*：
 
-```json
+```js
  { "name":"PI","children": [
     {"name":"荣耀手机","value":5607, "key":"荣耀3x", "childrens": [
         {"name": "荣耀畅玩版", "value": 6441,"key":"荣耀畅玩版"},
@@ -22,6 +22,6 @@
         {"name": "华为畅玩版", "value": 6306,"key":"华为畅玩版"},
         {"name": "荣耀畅玩", "value": 5411,"key":"荣耀畅玩"},
         {"name": "华为荣耀畅玩版手机", "value": 5427,"key":"华为荣耀畅玩版手机"},
-        {"name": "荣耀3x", "value": 5607,"key":"荣耀3x"}]}
-    ....
-    
+        {"name": "荣耀3x", "value": 5607,"key":"荣耀3x"}]
+      }]
+ }
