@@ -29,6 +29,6 @@
 
 ......
 
-预览地址：*[http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html](http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html)*
+预览地址：*[点此预览](http://kingarthas37.github.io/demos/demo-b5m/gzx/index.html)*
 
 截图：
